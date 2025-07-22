@@ -101,7 +101,7 @@ function simulasiGrosir() {
     <tbody>
   `;
 
-  const promoLines = ['Beli Banyak, Lebih Murah!'];
+  const promoLines = ['Beli Banyak, Lebih Murah!!'];
 
   for (let n = 1; n <= 10; n++) {
     let X = 0;
