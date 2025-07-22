@@ -146,9 +146,10 @@ function simulasiGrosir() {
       </tr>
     `;
 
-    promoLines.push(`Beli ${n}Pcs ${formatRp(hargaJualPcs)}`);
+    promoLines.push(`Beli ${n} ${formatRp(hargaJualPcs)} /pcs`);
   }
   hasil += '</tbody></table>';
+  promoLines.push('Beli Banyak, Untung Banyak!');
   const promoText = promoLines.join('\n');
   hasil += `
     <textarea id="promoText" class="form-control mt-2" rows="12" readonly>${promoText}</textarea>
