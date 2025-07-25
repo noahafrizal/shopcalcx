@@ -44,8 +44,12 @@ root.innerHTML = `
       <input id="labaRupiah" type="number" class="form-control" placeholder="Contoh: 1000">
     </div>
     <div class="mb-2">
-      <label>Laba Kotor:</label>
-      <input id="labaKotor" type="number" class="form-control" placeholder="Contoh: 4000">
+      <label>Increase:</label>
+      <input id="increase" type="number" class="form-control" placeholder="Contoh: 100">
+    </div>
+    <div class="mb-2">
+      <label>Mulai Increase:</label>
+      <input id="startIncrease" type="number" class="form-control" placeholder="Contoh: 3">
     </div>
     <button id="simulasiBtn" class="btn btn-success">Simulasikan</button>
     <div id="hasilSimulasi" class="mt-3"></div>
@@ -83,7 +87,8 @@ function simulasiGrosir() {
   const proses = +document.getElementById('proses').value;
   const labaPersen = +document.getElementById('labaPersen').value;
   const labaRupiah = +document.getElementById('labaRupiah').value;
-  const labaKotorInput = +document.getElementById('labaKotor').value;
+  const increase = +document.getElementById('increase').value;
+  const startIncrease = +document.getElementById('startIncrease').value;
 
   let hasil = `<table class="table table-bordered table-sm">
     <thead>
@@ -105,10 +110,7 @@ function simulasiGrosir() {
 
   for (let n = 1; n <= 10; n++) {
     let X = 0;
-    if (labaKotorInput > 0) {
-      // Prioritaskan Laba Kotor jika diisi
-      X = (hargaBeli + labaKotorInput) * n;
-    } else if (labaPersen > 0) {
+    if (labaPersen > 0) {
       const modal = hargaBeli * n;
       const packingTot = packing;
       const prosesTot = proses;
@@ -121,7 +123,12 @@ function simulasiGrosir() {
       const packingTot = packing;
       const prosesTot = proses;
       const adminFrac = adminPersen / 100;
-      X = (modal + packingTot + prosesTot + (labaRupiah * n)) / (1 - adminFrac);
+      let labaPerPcs = labaRupiah;
+      if (increase > 0 && n >= startIncrease) {
+        labaPerPcs += increase * (n - startIncrease + 1);
+      }
+      const labaTotal = labaPerPcs * n;
+      X = (modal + packingTot + prosesTot + labaTotal) / (1 - adminFrac);
     } else {
       continue;
     }
