@@ -9,7 +9,10 @@ root.innerHTML = `
   <h2>Kalkulator Simulasi Laba Shopee</h2>
   <div class="mb-3">
     <label>Harga Beli:</label>
-    <input id="hargaBeli" type="number" class="form-control" value="3000" />
+    <div class="input-group" style="max-width: 200px;">
+      <input id="hargaBeli" type="number" class="form-control" value="3000" />
+      <button id="hargaBeliPlus" class="btn btn-outline-secondary" type="button">+</button>
+    </div>
   </div>
   <div class="mb-3">
     <label>Harga Jual:</label>
@@ -168,6 +171,11 @@ function simulasiGrosir() {
 }
 
 document.getElementById('hitungBtn').onclick = hitungLaba;
+const hargaBeliPlus = document.getElementById('hargaBeliPlus');
+hargaBeliPlus.addEventListener('click', () => {
+  const hbInput = document.getElementById('hargaBeli');
+  hbInput.value = +hbInput.value * 2;
+});
 
 const grosirCheck = document.getElementById('grosirCheck');
 const grosirOptions = document.getElementById('grosirOptions');
