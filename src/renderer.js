@@ -16,7 +16,10 @@ root.innerHTML = `
   </div>
   <div class="mb-3">
     <label>Harga Jual:</label>
-    <input id="hargaJual" type="number" class="form-control" value="4500" />
+    <div class="input-group" style="max-width: 200px;">
+      <input id="hargaJual" type="number" class="form-control" value="4500" />
+      <button id="hargaJualPlus" class="btn btn-outline-secondary" type="button">+</button>
+    </div>
   </div>
   <div class="mb-3">
     <label>Admin (% dari harga jual):</label>
@@ -175,6 +178,12 @@ const hargaBeliPlus = document.getElementById('hargaBeliPlus');
 hargaBeliPlus.addEventListener('click', () => {
   const hbInput = document.getElementById('hargaBeli');
   hbInput.value = +hbInput.value * 2;
+});
+
+const hargaJualPlus = document.getElementById('hargaJualPlus');
+hargaJualPlus.addEventListener('click', () => {
+  const hjInput = document.getElementById('hargaJual');
+  hjInput.value = +hjInput.value * 2;
 });
 
 const grosirCheck = document.getElementById('grosirCheck');
