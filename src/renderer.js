@@ -11,6 +11,7 @@ root.innerHTML = `
     <label>Harga Beli:</label>
     <div class="input-group" style="max-width: 200px;">
       <input id="hargaBeli" type="number" class="form-control" value="3000" />
+      <button id="hargaBeliMinus" class="btn btn-outline-secondary" type="button">-</button>
       <button id="hargaBeliPlus" class="btn btn-outline-secondary" type="button">+</button>
     </div>
   </div>
@@ -18,12 +19,13 @@ root.innerHTML = `
     <label>Harga Jual:</label>
     <div class="input-group" style="max-width: 200px;">
       <input id="hargaJual" type="number" class="form-control" value="4500" />
+      <button id="hargaJualMinus" class="btn btn-outline-secondary" type="button">-</button>
       <button id="hargaJualPlus" class="btn btn-outline-secondary" type="button">+</button>
     </div>
   </div>
   <div class="mb-3">
     <label>Admin (% dari harga jual):</label>
-    <input id="adminPersen" type="number" class="form-control" value="12" />
+    <input id="adminPersen" type="number" class="form-control" value="12.5" />
   </div>
   <div class="mb-3">
     <label>Biaya Packing (per order):</label>
@@ -174,16 +176,29 @@ function simulasiGrosir() {
 }
 
 document.getElementById('hitungBtn').onclick = hitungLaba;
-const hargaBeliPlus = document.getElementById('hargaBeliPlus');
-hargaBeliPlus.addEventListener('click', () => {
-  const hbInput = document.getElementById('hargaBeli');
-  hbInput.value = +hbInput.value * 2;
+
+const hbInput = document.getElementById('hargaBeli');
+let hbStep = +hbInput.value;
+hbInput.addEventListener('input', () => {
+  hbStep = +hbInput.value;
+});
+document.getElementById('hargaBeliPlus').addEventListener('click', () => {
+  hbInput.value = +hbInput.value + hbStep;
+});
+document.getElementById('hargaBeliMinus').addEventListener('click', () => {
+  hbInput.value = Math.max(0, +hbInput.value - hbStep);
 });
 
-const hargaJualPlus = document.getElementById('hargaJualPlus');
-hargaJualPlus.addEventListener('click', () => {
-  const hjInput = document.getElementById('hargaJual');
-  hjInput.value = +hjInput.value * 2;
+const hjInput = document.getElementById('hargaJual');
+let hjStep = +hjInput.value;
+hjInput.addEventListener('input', () => {
+  hjStep = +hjInput.value;
+});
+document.getElementById('hargaJualPlus').addEventListener('click', () => {
+  hjInput.value = +hjInput.value + hjStep;
+});
+document.getElementById('hargaJualMinus').addEventListener('click', () => {
+  hjInput.value = Math.max(0, +hjInput.value - hjStep);
 });
 
 const grosirCheck = document.getElementById('grosirCheck');
